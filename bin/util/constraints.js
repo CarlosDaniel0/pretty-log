@@ -33,4 +33,6 @@ const theme = {
   }
 }
 
-module.exports = { theme }
+const log_path = `\\\\192.168.10.31\\log\\`
+
+module.exports = { theme, log_path }

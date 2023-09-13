@@ -1,5 +1,6 @@
 const chalk = require('chalk')
 const fs = require('fs')
+const { log_path } = require('../util/constraints')
 
 const readFile = (file) => new Promise((resolve, reject) => {
   fs.readFile(file, (err, data) => {
@@ -10,9 +11,8 @@ const readFile = (file) => new Promise((resolve, reject) => {
 
 const logName = (date) => {
   const today = date ?? new Date(new Date().setHours(0,0,0,0)).toISOString().substring(0, 10)
-  const folder = `\\\\192.168.10.31\\log\\` 
   const file = `SqlReact${today}-ip-192.168.10.38.txt`
-  return folder + file
+  return log_path + file
 }
 
 const readLogFile = async (date) => {
