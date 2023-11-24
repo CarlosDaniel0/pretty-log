@@ -9,12 +9,23 @@ const readFile = (file) => new Promise((resolve, reject) => {
   }) 
 }) 
 
+
+/**
+ * Format the file name used to find log file
+ * @param {Date} date 
+ * @returns 
+ */
 const logName = (date) => {
   const today = date ?? new Date(new Date().setHours(0,0,0,0)).toISOString().substring(0, 10)
   const file = `SqlReact${today}-ip-192.168.10.38.txt`
   return log_path + file
 }
 
+/**
+ * Try read log file and return content, but if found error return error message
+ * @param {Date} date 
+ * @returns 
+ */
 const readLogFile = async (date) => {
   const src = logName(date)
   try {
@@ -24,6 +35,11 @@ const readLogFile = async (date) => {
   }
 }
 
+/**
+ * 
+ * @param {Date} date 
+ * @returns 
+ */
 const getLog = async (date) => {
   const [result, data] = await readLogFile(date)
   if (!result) throw new Error(data + '')

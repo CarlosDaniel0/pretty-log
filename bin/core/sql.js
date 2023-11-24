@@ -36,19 +36,27 @@ const hightlightSQL = (text) => {
       const tables = uniquify(str.replace('\n', ' ').match(/(?<=(from|join|update|into) )(\w+)/gi) ?? [])
       const functions = uniquify(str.match(/(\w+)(?=\()/gi)?? [])
       const strings = uniquify(str.match(/\'(.*?)\'/gi) ?? [])
-      const numbers = uniquify(str.match(/([0-9])+/) ?? [])
- 
-      words.forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word)))
-      functions.forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word, 'function')))
+      const numbers = uniquify(str.match(/(?:(?! |=|,|\())([0-9])+/gi) ?? [])
+
       numbers
-        .filter(word => !strings.some(item => item.includes(word)))
-        .forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word, 'number')))
+      .filter(word => !strings.some(item => item.includes(word)))
+      .forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word, 'number')) )
+
+      functions
+        .filter(word => !keywords.includes(word.replace('(', '')))
+        .forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word, 'function')))
+    
+      words
+      .filter(word => !strings.some(item => item.includes(word)))
+      .forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word))) 
+      
       words.filter(word => 
         !keywords.includes(word) 
         && !functions.includes(word)
         && !tables.includes(word)
         && !strings.some(string => string.includes(word)))
         .forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word, 'field')))
+
       strings.forEach(word => str = str.replace(new RegExp(String.raw`${word}`.replace(/[()[\]'"+*<>!@#$%¨&_+=?|~^\\]/gi, item => '\\' + item), 'gi'), colorizeSQL(word, 'string')))
       str = str.replace(/(\s{2,15})/gi, '  ').trim()
       return str
