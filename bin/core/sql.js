@@ -35,7 +35,7 @@ const hightlightSQL = (text) => {
       const words = uniquify(str.match(/([A-Z])\w+/gi) ?? [])
       const tables = uniquify(str.replace('\n', ' ').match(/(?<=(from|join|update|into) )(\w+)/gi) ?? [])
       const functions = uniquify(str.match(/(\w+)(?=\()/gi)?? [])
-      const strings = uniquify(str.match(/\'(.*?)\'/gi) ?? [])
+      const strings = uniquify(str.match(/\'(.*?)\'/gi) ?? []) // 
       const numbers = uniquify(str.match(/(?:(?! |=|,|\())([0-9])+/gi) ?? [])
 
       numbers
@@ -57,6 +57,7 @@ const hightlightSQL = (text) => {
         && !strings.some(string => string.includes(word)))
         .forEach(word => str = str.replace(new RegExp(`\\b${word}\\b`, 'gi'), colorizeSQL(word, 'field')))
 
+      // console.log(strings, numbers)
       strings.forEach(word => str = str.replace(new RegExp(String.raw`${word}`.replace(/[()[\]'"+*<>!@#$%¨&_+=?|~^\\]/gi, item => '\\' + item), 'gi'), colorizeSQL(word, 'string')))
       str = str.replace(/(\s{2,15})/gi, '  ').trim()
       return str

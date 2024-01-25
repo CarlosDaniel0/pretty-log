@@ -5,7 +5,7 @@ const { log_path } = require('../util/constraints')
 const readFile = (file) => new Promise((resolve, reject) => {
   fs.readFile(file, (err, data) => {
     if (err) reject(err)
-    resolve(data)
+    resolve(data) 
   }) 
 }) 
 
