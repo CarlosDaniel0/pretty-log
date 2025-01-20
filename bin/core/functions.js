@@ -41,7 +41,7 @@ const getNetworkAddres = () => {
 const logName = (date) => {
   const today = date ?? new Date(new Date().setHours(0, 0, 0, 0)).toISOString().substring(0, 10)
   const IP = getNetworkAddres()["Ethernet"][0]
-  const file = `SqlReact${today}-ip-${IP}.txt`
+  const file = `Sql-React-${today}-ip-${IP}.txt`
   return log_path + file
 }
 
