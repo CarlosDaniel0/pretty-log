@@ -10,8 +10,10 @@ const highlight = (text, cols) => {
   let str = text
   str = str
     .split('\n')
-    .map(line =>
-      line.length > cols ? line.replace(new RegExp(`.{${cols}}`, 'g'), item => `${item}\n`) : line)
+    .map(line => {
+      if (line.length > cols) return line.replace(new RegExp(`.{${cols}}`, 'g'), item => `${item}\n`)
+      return line
+    })
     // .filter((_,i) => i>= 3265 && i <= 3380)
     .join('\n')
   const chunks = str.split('*'.repeat(92))

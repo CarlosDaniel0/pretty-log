@@ -1,5 +1,6 @@
 const { getLog, handleError } = require('./core/functions')
 const { output } = require('./core/output'); 
+require('dotenv').config()
 const yargs = require('yargs');
  
 yargs
