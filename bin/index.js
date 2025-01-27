@@ -1,6 +1,6 @@
 const { getLog, handleError } = require('./core/functions')
 const { output } = require('./core/output'); 
-require('dotenv').config()
+require('dotenv').config({ path: String.raw`C:\Users\DEV-01\Documents\Development\Node\beautiful-log\.env` })
 const yargs = require('yargs');
  
 yargs
