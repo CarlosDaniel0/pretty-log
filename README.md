@@ -21,7 +21,7 @@ Altere o arquivo .env.example para .env e preencha os dados
 |  Variável  |    Valor     |
 |------------|--------------|
 |  USER      |  Meu Usuário |
-|  LOG_PATH  |  \\IP\log    |
+|  LOG_PATH  |  \\\\IP\log    |
 
 Modelo de log base para o highlight.js
 ![Modelo de Log](docs/Captura_2.png)
