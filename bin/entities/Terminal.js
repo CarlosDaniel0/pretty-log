@@ -173,7 +173,7 @@ class Terminal {
             self.show()
           }
           self.row = Math.max(--self.row, 0);
-          if (self.row === 0 || self.row === self.rows) {
+          if (self.row === 0) {
             self.file.line--;
             self.show()
           }
