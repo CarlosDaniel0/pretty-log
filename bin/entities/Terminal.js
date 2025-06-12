@@ -157,7 +157,7 @@ class Terminal {
       key.name
       && ["up", "down", "right", "left", 'e', 's'].some((k) => ['e', 's'].includes(k) ? !self.search.show : key.name.includes(k))
     ) {
-      if (key.name === "up" || key.name !== 's') {
+      if (key.name === "up" || key.name === 's') {
         if (key.name !== 's' && self.search.show) {
           self.search.history.index = Math.max(--self.search.history.index, 0)
           const value = self.search.history.content[self.search.history.index]
@@ -171,8 +171,9 @@ class Terminal {
           if (key.name === 's') {
             self.file.line = self.rows + 1
             self.show()
+          } else {
+            self.row = Math.max(--self.row, 0);
           }
-          self.row = Math.max(--self.row, 0);
           if (self.row === 0) {
             self.file.line--;
             self.show()
@@ -199,8 +200,9 @@ class Terminal {
             if (!self.file.open) self.file.line = self.file.eof + (self.file.line < 0 ? 2 : 1)
             load.stop()
             self.show()
+          } else {
+            self.row = Math.min(++self.row, self.rows);
           }
-          self.row = Math.min(++self.row, self.rows);
           if (self.row === self.rows) {
             if (self.file.open) self.file.read(1)
             else self.file.line++
@@ -228,7 +230,7 @@ class Terminal {
         }
       }
       if (!self.search.show || !['up, down'].includes(key.name))
-        process.stdout.cursorTo(self.column, self.row);
+        process.stdout.cursorTo(self.column, self.row)
     } else {
       if (str && key.name !== 'return') {
         self.column = Math.min(++self.column, self.columns);
