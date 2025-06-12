@@ -1,6 +1,7 @@
 
 const { getLog } = require("./core/output");
-require("dotenv").config({ path: String.raw`C:\Users\DEV-01\Documents\Development\Node\pretty-log\.env` });
+const { pathDotEnv } = require("./util/constants");
+require("dotenv").config({ path: pathDotEnv });
 const yargs = require("yargs");
 
 yargs

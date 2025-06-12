@@ -1,3 +1,4 @@
+const pathDotEnv = String.raw`C:\Users\DEV-01\Documents\Development\Node\pretty-log\.env`
 const colors = {
   purple: {
     300: '#9d6bfa',
@@ -48,7 +49,8 @@ const replaces = {
 
 const ignore = /^(USUARIO|DATA|SCRIPT|REFERENTE|IP|VERSAO|PATH|NOMETELA|CLASSE|METODO|BANCO WEB|GET|POST|url|session_id|\*+)/g
 
-const log_path = `\\\\SRV60\\log\\`
+require("dotenv").config({ path: pathDotEnv  });
+const log_path = process.env.LOG_PATH
 
 const headerLang = () => ({
   case_insensitive: true, // language is case-insensitive
@@ -80,4 +82,4 @@ const headerLang = () => ({
   ]
 })
 
-module.exports = { theme, log_path, replaces, ignore, headerLang }
+module.exports = { theme, log_path, replaces, ignore, headerLang, pathDotEnv }
