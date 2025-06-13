@@ -15,7 +15,8 @@ const colors = {
   },
   blue: {
     50: '#86dbfc',
-    200: '#18baf0'
+    200: '#18baf0',
+    800: '#264f78'
   },
   green: {
     300: '#52bf71',
@@ -37,7 +38,7 @@ const theme = {
     divider: colors.blue[50]
   },
   search: {
-    selection: colors.green[800]
+    selection: colors.blue[800]
   }
 }
 
@@ -49,7 +50,7 @@ const replaces = {
 
 const ignore = /^(USUARIO|DATA|SCRIPT|REFERENTE|IP|VERSAO|PATH|NOMETELA|CLASSE|METODO|BANCO WEB|GET|POST|url|session_id|\*+)/g
 
-require("dotenv").config({ path: pathDotEnv  });
+require("dotenv").config({ path: pathDotEnv });
 const log_path = process.env.LOG_PATH
 
 const headerLang = () => ({
