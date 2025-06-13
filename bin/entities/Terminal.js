@@ -131,7 +131,7 @@ class Terminal {
   }
 
   async handleKeys(self, str, key) {
-    if (key.ctrl && key.name === "c") {
+    if (key.ctrl && key.name === 'c' || key.name === 'escape') {
       console.clear();
       self.rl.close();
     } else if (key.ctrl && key.name === 'b') {
